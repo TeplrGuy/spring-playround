@@ -11,4 +11,9 @@ public class HelloController {
         return "Hello from Spring!";
     }
 
+    @GetMapping("/index")
+    public String index(){
+        return "This is index";
+    }
+
 }
