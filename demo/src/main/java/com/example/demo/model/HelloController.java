@@ -16,4 +16,10 @@ public class HelloController {
         return "This is index";
     }
 
+    @GetMapping("/math/pi")
+    public String mathPi(){
+        return "3.141592653589793";
+    }
+
+
 }

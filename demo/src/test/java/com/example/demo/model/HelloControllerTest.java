@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,21 @@ public class HelloControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
-    public void testIndexEndpoint() throws Exception {
+    public void setUpRequestBuilder(String path, String returnValue) throws Exception{
 
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/index");
-
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(path);
         this.mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk())
-                .andExpect(content().string("This is index"));
+                .andExpect(content().string(returnValue));
+    }
 
+    @Test
+    public void testIndexEndpoint() throws Exception {
+       setUpRequestBuilder("/index", "This is index");
+    }
+
+    @Test
+    public void mathEndpointShouldReturnPiValue() throws Exception {
+        setUpRequestBuilder("/math/pi", "3.141592653589793");
     }
 }
