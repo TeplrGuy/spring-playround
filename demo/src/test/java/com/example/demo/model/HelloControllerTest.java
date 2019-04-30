@@ -21,7 +21,7 @@ public class HelloControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    public void setUpRequestBuilder(String path, String returnValue) throws Exception{
+    public void setUpRequestBuilderAndPerformMock(String path, String returnValue) throws Exception{
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(path);
         this.mockMvc.perform(requestBuilder)
@@ -31,11 +31,11 @@ public class HelloControllerTest {
 
     @Test
     public void testIndexEndpoint() throws Exception {
-       setUpRequestBuilder("/index", "This is index");
+       setUpRequestBuilderAndPerformMock("/index", "This is index");
     }
 
     @Test
     public void mathEndpointShouldReturnPiValue() throws Exception {
-        setUpRequestBuilder("/math/pi", "3.141592653589793");
+        setUpRequestBuilderAndPerformMock("/math/pi", "3.141592653589793");
     }
 }
