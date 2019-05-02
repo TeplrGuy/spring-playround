@@ -34,18 +34,15 @@ public class MathController {
 //        return "3.141592653589793";
 //    }
 
-    /**
-     *
-     * @param webRequest
-     * @return
-     */
     @PostMapping("/math/calculate")
     public int calculate(WebRequest webRequest) {
         Map<String, String[]> params = webRequest.getParameterMap();
-
         return mathService.calculate(params);
     }
 
-
-
+    @PostMapping("/math/sum")
+    public int sum(WebRequest webRequest) {
+        Map<String, String[]> params = webRequest.getParameterMap();
+        return mathService.sum(params);
+    }
 }

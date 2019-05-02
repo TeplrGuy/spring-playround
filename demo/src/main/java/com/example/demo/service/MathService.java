@@ -35,10 +35,10 @@ public class MathService {
         return 0;
     }
 
-//    public int sum(Map<String, String[]> params) {
-//        String[] n = params.getOrDefault("n", new String[]{"0"});
-//        return Arrays.stream(parseIntArray(n)).sum();
-//    }
+    public int sum(Map<String, String[]> params) {
+        String[] n = params.getOrDefault("n", new String[]{"0"});
+        return Arrays.stream(parseIntArray(n)).sum();
+    }
 
 
     /**
@@ -53,6 +53,4 @@ public class MathService {
     private static int[] parseIntArray(String[] arr) {
         return Stream.of(arr).mapToInt(Integer::parseInt).toArray();
     }
-
-
 }
