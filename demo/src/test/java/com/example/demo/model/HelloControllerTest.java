@@ -1,11 +1,9 @@
 package com.example.demo.model;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -21,9 +19,7 @@ public class HelloControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    public void setUpRequestBuilderAndPerformMock(String path, String returnValue) throws Exception{
-
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(path);
+    public void setUpRequestBuilderAndPerformMock(String returnValue, RequestBuilder requestBuilder) throws Exception{
         this.mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk())
                 .andExpect(content().string(returnValue));
@@ -31,11 +27,17 @@ public class HelloControllerTest {
 
     @Test
     public void testIndexEndpoint() throws Exception {
-       setUpRequestBuilderAndPerformMock("/index", "This is index");
+       setUpRequestBuilderAndPerformMock("This is index", MockMvcRequestBuilders.get("/index"));
     }
 
     @Test
     public void mathEndpointShouldReturnPiValue() throws Exception {
-        setUpRequestBuilderAndPerformMock("/math/pi", "3.141592653589793");
+        setUpRequestBuilderAndPerformMock("3.141592653589793", MockMvcRequestBuilders.get("/math/pi"));
+    }
+
+    @Test
+    public void mathCalculateShouldReturnTheCorrectValue() throws Exception{
+        setUpRequestBuilderAndPerformMock(
+                "13", MockMvcRequestBuilders.post("/math/calculate?operation=subtract&x=20&x=3&y=8"));
     }
 }
