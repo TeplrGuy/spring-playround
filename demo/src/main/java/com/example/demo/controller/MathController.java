@@ -1,23 +1,22 @@
-package com.example.demo.model;
+package com.example.demo.controller;
 
 import com.example.demo.service.MathService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
-import java.util.Arrays;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RestController
 public class MathController {
 
+    private final MathService mathService;
+
     @Autowired
-    private MathService mathService;
+    public MathController(MathService mathService) {
+        this.mathService = mathService;
+    }
 //
 //    @GetMapping("/")
 //    public String helloWorld() {
